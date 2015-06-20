@@ -92,6 +92,7 @@
 		.text("HBO");
 		
 	//Add small explanation
+	/*
 	chordExplanationWrapper.append("text")
 		.attr("x", 10)
 		.attr("y", (chordHeight))
@@ -104,7 +105,7 @@
 			  "en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. " +
 			  "De dikte van een lijn geeft het aantal afgestudeerden weer " +
 			  "en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien")
-		.call(wrap, 300);
+		.call(wrap, 300);*/
 
 	//Move the buttons to the middle
 	//d3.select("#ChordButtonWrapper")

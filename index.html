@@ -8,26 +8,19 @@
 	<!-- ADD ALL SOTS HTML FRAGMENTS CSS HERE -->
 	
 	<!-- D3.js -->
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/sots_onderwijs_d3.v3.min.js"></script>
 	
 	<!-- jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="css/custom-bootstrap.css">
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
 
 	<!-- Scripts needed for all Education plots -->
 	<link rel="stylesheet" href="css/sots_style.css">
-	<script src="js/sots_helperFunctions.js"></script>
-	<!-- Scripts needed for Education Chord plot -->
-	<script src="js/sots_chord.js"></script>
-	<!-- Scripts needed for Education Rose plot -->
-	<script src="js/sots_flowers.js"></script>
-	<!-- Scripts needed for Education Scatter plot -->
-	<script src="js/sots_studies.js"></script>
-	<script src="js/sots_drawScatter.js"></script>
-	<script src="js/sots_bubbleLegend.js"></script>
+	<script src="js/sots_onderwijs_general.js"></script>
 
 </head>
 
@@ -36,17 +29,25 @@
 	<!-- SotS Onderwijs Stretched Chord HTML -->
 	<div class = "sotsVisualWrapper">
 		<div id="cont" class="container-fluid">
-			<div class="row">
-				<div class="col-md-12 column text-center">
+			<div class="row text-center">
+				<div class="col-md-12">
+					<div class="title-h3" style="color: #3B3B3B; padding-bottom: 10px;">Welke opleidingen leiden tot welke beroepen?</div>
 					<div class="dataresource chord"></div>
 				</div>
 			</div>
-			<div class="row">
-				<div id="ChordButtonWrapper" class="col-md-12 column text-center">
+			<div class="row text-center">
+				<div id="ChordButtonWrapper" class="col-md-12">
 					<div id="ChordButtons" class="btn-group" data-toggle="buttons">
 						<label id="ChordMBObutton" class="btn btn-default"><input type="radio" class="btn-options"> MBO </label>
 						<label id="ChordHBObutton" class="btn btn-default active"><input type="radio" class="btn-options"> HBO </label>
 					</div>
+				</div>
+			</div>
+			<div class="row text-center">
+				<div class="col-md-6 col-md-offset-3">
+					<div style="color: #949494; font-size: 11px; padding-top: 20px;">Deze plot laat per opleiding zien in welke sector deze afgestudeerden iets meer dan een jaar later werken. 
+					Aan de linkerkant staan de verschillende opleidingsrichtingen en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. 
+					De dikte van een lijn geeft het aantal afgestudeerden weer en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien</div>
 				</div>
 			</div>
 		</div>
@@ -58,28 +59,28 @@
 	<!-- SotS Onderwijs Roses HTML -->
 	<div class = "sotsVisualWrapper">
 		<div id="cont" class="container-fluid">
-			<div class="row">
-				<div class="col-md-12 column text-center">
-					<h3 style="color: #3B3B3B; padding-bottom: 10px;">Naar welke provincie verhuis je na je studie?</h3>
+			<div class="row text-center">
+				<div class="col-md-12">
+					<div class="title-h3" style="color: #3B3B3B; padding-bottom: 10px;">Naar welke provincie verhuis je na je studie?</div>
 					<div class = "flowerSubTitle" style="color: #5E5E5E; font-size: 16px; padding-bottom: 10px;">HBO</div>
 					<div style="color: #6E6E6E; font-size: 14px; padding-bottom: 20px;">Tijdens de studie woonde je in...</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12 column text-center">
+			<div class="row text-center">
+				<div class="col-md-12">
 					<div class="dataresource rose"></div>
 				</div>
 			</div>
-			<div class="row">
-				<div id="RoseButtonWrapper" class="col-md-12 column text-center">
+			<div class="row text-center">
+				<div id="RoseButtonWrapper" class="col-md-12">
 					<div id="RoseButtons" class="btn-group" data-toggle="buttons">
 						<label id="RoseMBObutton" value="MBO" class="btn btn-default roseButton"><input type="radio" class="btn-options"> MBO </label>
 						<label id="RoseHBObutton" value="HBO" class="btn btn-default roseButton active"><input type="radio" class="btn-options"> HBO </label>
 					</div>
 				</div>
 			</div>
-			<div class="row" style="padding: 30px 0px;">
-				<div class="col-sm-6 column" style="padding-bottom: 20px;">
+			<div class="row" style="padding-top: 30px;">
+				<div class="col-sm-6">
 					<div id="roseExplanation" style="color: #949494; font-size: 11px; line-height: 150%">
 						Elk van de kleine plots of 'bloemen' is een provincie. In het midden staat het percentage van afgestudeerden dat 1.5 jaar later 
 						nog steeds in dezelfde provincie woont als waar ze woonden tijdens hun afstuderen. De vlakken of 'blaadjes' geven weer naar welke provincies 
@@ -88,7 +89,7 @@
 						Van de overige 39% is verreweg het grootste deel, 18.1%, naar Groningen verhuisd.
 					</div>
 				</div>
-				<div class="col-sm-6 column" style="padding-bottom: 20px;">
+				<div class="col-sm-6">
 					<div id="roseLegendSquares"></div>
 					<div id="roseLegendCircles" style="padding-top: 10px;"></div>
 				</div>
@@ -103,15 +104,17 @@
 	<div class = "sotsVisualWrapper">
 		<div id="cont" class="container-fluid">
 			<div class="row scatterOnderwijs text-center">
-				<h3 style="color: #3B3B3B; padding-bottom:25px;">Aansluiting en Mobilliteit tussen Opleidingen en Beroepen</h3>
-				<div class="col-sm-5 column text-center">
+				<div class="title-h3" style="color: #3B3B3B; padding-bottom:25px;">Aansluiting en Mobilliteit tussen Opleidingen en Beroepen</div>
+				<div class="col-md-5">
 					<div class="dataresource scatterMBO"></div>
 				</div>
-				<div class="col-sm-2 column text-center">
-					<div class="dataresource scatterLegend"></div>
-				</div>
-				<div class="col-sm-5 column text-center">
+				<div class="col-md-5 col-md-push-2">
 					<div class="dataresource scatterHBO"></div>
+				</div>
+				<div class="col-md-2 col-md-pull-5">
+					<div class="legendTitle" style="font-size: 13px; padding-top: 5px;">Studie sector</div>
+					<div class="legendText" style="font-size: 10px; padding-top: 5px;">Selecteer alle opleidingen binnen 1 sector door op een sector in de legenda te klikken</div>
+					<div class="dataresource scatterLegend"></div>
 				</div>
 			</div>
 		</div>
@@ -210,9 +213,13 @@
 	</svg>	
 	
 	<!-- ADD ALL SOTS HTML FRAGMENTS JS HERE -->
-	<script src="js/sots_main_chord.js"></script>
-	<script src="js/sots_main_flowers.js" ></script>
-	<script src="js/sots_main_scatter.js"></script>
+	
+	<!-- Scripts needed for Education Chord plot -->
+	<script src="js/sots_onderwijs_chord_total.js"></script>
+	<!-- Scripts needed for Education Rose plot -->
+	<script src="js/sots_onderwijs_flowers_total.js"></script>
+	<!-- Scripts needed for Education Scatter plot -->
+	<script src="js/sots_onderwijs_scatter_total.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,137 @@
+<!-- ADD ALL SOTS HTML FRAGMENTS CSS HERE -->
+
+<!-- D3.js -->
+<script src="/content/dam/html/nl/sots/onderwijs/js/sots_onderwijs_d3.v3.min.js"></script>
+
+<link rel="stylesheet" href="/content/dam/html/nl/sots/onderwijs/css/custom-bootstrap.css">
+
+<!-- Scripts needed for all Education plots -->
+<link rel="stylesheet" href="/content/dam/html/nl/sots/onderwijs/css/sots_style.css">
+<script src="/content/dam/html/nl/sots/onderwijs/js/sots_onderwijs_general.min.js"></script>
+
+<!-- SotS Onderwijs Stretched Chord HTML -->
+<div class = "sotsVisualWrapper">
+	<div id="cont" class="container-fluid">
+		<div class="row text-center">
+			<div class="col-md-12">
+				<div class="title-h3" style="color: #3B3B3B; padding-bottom: 10px;">Welke opleidingen leiden tot welke beroepen?</div>
+				<div class="dataresource chord"></div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div id="ChordButtonWrapper" class="col-md-12">
+				<div id="ChordButtons" class="btn-group" data-toggle="buttons">
+					<label id="ChordMBObutton" class="btn btn-default"><input type="radio" class="btn-options"> MBO </label>
+					<label id="ChordHBObutton" class="btn btn-default active"><input type="radio" class="btn-options"> HBO </label>
+				</div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-6 col-md-offset-3">
+				<div style="color: #949494; font-size: 11px; padding-top: 20px;">Deze plot laat per opleiding zien in welke sector deze afgestudeerden iets meer dan een jaar later werken. 
+				Aan de linkerkant staan de verschillende opleidingsrichtingen en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. 
+				De dikte van een lijn geeft het aantal afgestudeerden weer en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien</div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-12">
+				<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">Bron: BVE Monitor 2013 & HBO Monitor 2013</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Animated gradient for Chord Diagram -->
+<svg height="0cm" width="0cm">
+	<defs>
+		<linearGradient id="gradientLinearPerLine" x1="0%" y1="0%" x2="100%" y2="0%">
+
+			  <stop offset="-100%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="-1;0" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="-75%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="-0.75;0.25" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+		
+			  <stop offset="-50%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="-0.5;0.5" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="-25%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="-0.25;0.75" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="0%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="0;1" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="25%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="0.25;1.25" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="50%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="0.5;1.5" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>	
+
+			  <stop offset="75%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="0.75;1.75" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="100%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="1;2" dur="9s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+		</linearGradient>
+	</defs>
+</svg>					
+
+<svg height="0cm" width="0cm">
+	<defs>
+		<linearGradient id="gradientLinear" x1="-100%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+
+			  <stop offset="-100%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="-1;0" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="-75%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="-0.75;0.25" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="-50%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="-0.5;0.5" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="-25%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="-0.25;0.75" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="0%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="0;1" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="25%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="0.25;1.25" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="50%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="0.5;1.5" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>	
+			  
+			  <stop offset="75%" stop-color="#BEBEBE" stop-opacity=".5">
+				<animate attributeName="offset" values="0.75;1.75" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+			  <stop offset="100%" stop-color="#858585" stop-opacity=".5">
+				<animate attributeName="offset" values="1;2" dur="5s" repeatCount="indefinite"></animate>
+			  </stop>
+			  
+		</linearGradient>
+	</defs>
+</svg>	
+
+<!-- ADD ALL SOTS HTML FRAGMENTS JS HERE -->
+
+<!-- Scripts needed for Education Chord plot -->
+<script src="/content/dam/html/nl/sots/onderwijs/js/sots_onderwijs_chord_total.js"></script>
+

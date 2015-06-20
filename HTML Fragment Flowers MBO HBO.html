@@ -1,0 +1,48 @@
+<!-- SotS Onderwijs Roses HTML -->
+<div class = "sotsVisualWrapper">
+	<div id="cont" class="container-fluid">
+		<div class="row text-center">
+			<div class="col-md-12">
+				<div class="title-h3" style="color: #3B3B3B; padding-bottom: 10px;">Naar welke provincie verhuis je na je studie?</div>
+				<div class = "flowerSubTitle" style="color: #5E5E5E; font-size: 16px; padding-bottom: 10px;">HBO</div>
+				<div style="color: #6E6E6E; font-size: 14px; padding-bottom: 20px;">Tijdens de studie woonde je in...</div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-12">
+				<div class="dataresource rose"></div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div id="RoseButtonWrapper" class="col-md-12">
+				<div id="RoseButtons" class="btn-group" data-toggle="buttons">
+					<label id="RoseMBObutton" value="MBO" class="btn btn-default roseButton"><input type="radio" class="btn-options"> MBO </label>
+					<label id="RoseHBObutton" value="HBO" class="btn btn-default roseButton active"><input type="radio" class="btn-options"> HBO </label>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="padding-top: 30px;">
+			<div class="col-sm-6">
+				<div id="roseExplanation" style="color: #949494; font-size: 11px; line-height: 150%">
+					Elk van de kleine plots of 'bloemen' is een provincie. In het midden staat het percentage van afgestudeerden dat 1.5 jaar later 
+					nog steeds in dezelfde provincie woont als waar ze woonden tijdens hun afstuderen. De vlakken of 'blaadjes' geven weer naar welke provincies 
+					de overige afgestudeerden zijn verhuisd.<br>
+					Bijvoorbeeld, 61% van de afgestudeerden die tijdens de studie in Drenthe woonden, wonen hier 1.5 jaar later nog steeds. 
+					Van de overige 39% is verreweg het grootste deel, 18.1%, naar Groningen verhuisd.
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div id="roseLegendSquares"></div>
+				<div id="roseLegendCircles" style="padding-top: 10px;"></div>
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-12">
+				<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">Bron: BVE Monitor 2013 & HBO Monitor 2013</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Scripts needed for Education Rose plot -->
+<script src="/content/dam/html/nl/sots/onderwijs/js/sots_onderwijs_flowers_total.min.js"></script>

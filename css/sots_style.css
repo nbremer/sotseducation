@@ -1,3 +1,22 @@
+.title-h3,
+.title-h4 {
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+.title-h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+.title-h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
 .axis path,
 .axis line {
 	fill: none;
@@ -36,12 +55,14 @@
 
 .legendTitle {
 	fill: #737373;
+	color: #737373;
 	text-anchor: middle;
 	font-size: 10px;
 }
 
 .legendText {
 	fill: #A8A8A8;
+	color: #A8A8A8;
 	text-anchor: start;
 	font-size: 8px;
 }

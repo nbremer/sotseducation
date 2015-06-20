@@ -8,7 +8,7 @@ function drawChord(width, height, margin) {
 	
 	var Names= ["Administratief personeel","Ambachtslieden","Bedrijfsbeheer (vak)specialisten","Elementaire beroepen","Gezondheidszorg (vak)specialisten",
 				"IT (vak)specialisten","Juridisch en culturele (vak)specialisten","Leidinggevende functies","Onderwijsgevenden",
-				"Verkopers en verleners persoonlijke diensten","Verzorgend personeel","Wetenschap en techniek (vak)specialisten", "Overig", "",
+				"Verkopers en verleners persoonlijke diensten","Verzorgend personeel","Wetenschap/Techniek (vak)specialisten", "Overig", "",
 				"Techniek","Onderwijs","Landbouw","Kunst, Taal en Cultuur","Gezondheidszorg","Gedrag & Maatschappij","Economie",""];
 	var emptyPerc = 0.5,
 		numProffesions = 13;
