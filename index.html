@@ -22,6 +22,16 @@
 	<link rel="stylesheet" href="css/sots_style.css">
 	<script src="js/sots_onderwijs_general.js"></script>
 
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>
+	<style>
+		body {
+		  font-family: 'Open Sans', sans-serif;
+		  font-size: 10px;
+		  font-weight: 400;
+		  color: #969696;
+		}	
+	</style>
+	
 </head>
 
 <body>
@@ -44,7 +54,7 @@
 				</div>
 			</div>
 			<div class="row text-center">
-				<div class="col-md-6 col-md-offset-3">
+				<div class="col-md-8 col-md-offset-2">
 					<div style="color: #949494; font-size: 11px; padding-top: 20px;">Deze plot laat per opleiding zien in welke sector deze afgestudeerden iets meer dan een jaar later werken. 
 					Aan de linkerkant staan de verschillende opleidingsrichtingen en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. 
 					De dikte van een lijn geeft het aantal afgestudeerden weer en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien</div>
@@ -105,16 +115,21 @@
 		<div id="cont" class="container-fluid">
 			<div class="row scatterOnderwijs text-center">
 				<div class="title-h3" style="color: #3B3B3B; padding-bottom:25px;">Aansluiting en Mobilliteit tussen Opleidingen en Beroepen</div>
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<div class="dataresource scatterMBO"></div>
 				</div>
-				<div class="col-md-5 col-md-push-2">
+				<div class="col-md-6">
 					<div class="dataresource scatterHBO"></div>
 				</div>
-				<div class="col-md-2 col-md-pull-5">
-					<div class="legendTitle" style="font-size: 13px; padding-top: 5px;">Studie sector</div>
-					<div class="legendText" style="font-size: 10px; padding-top: 5px;">Selecteer alle opleidingen binnen 1 sector door op een sector in de legenda te klikken</div>
+			</div>
+			<div class="row scatterOnderwijs text-center">
+				<div class="col-md-9">
+					<div class="legendTitle" style="font-size: 16px; padding-top: 5px;">Studie sector</div>
+					<div class="legendText" style="font-size: 14px; padding-top: 5px;">Selecteer alle opleidingen binnen 1 sector door op een sector in de legenda te klikken</div>
 					<div class="dataresource scatterLegend"></div>
+				</div>
+				<div class="col-md-3">
+					<div class="dataresource scatterLegendCircle"></div>
 				</div>
 			</div>
 		</div>

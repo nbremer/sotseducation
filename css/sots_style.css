@@ -54,15 +54,15 @@
 }
 
 .legendTitle {
-	fill: #737373;
-	color: #737373;
+	fill: #1A1A1A;
+	color: #1A1A1A;
 	text-anchor: middle;
 	font-size: 10px;
 }
 
 .legendText {
-	fill: #A8A8A8;
-	color: #A8A8A8;
+	fill: #6B6B6B;
+	color: #6B6B6B;
 	text-anchor: start;
 	font-size: 8px;
 }
@@ -79,6 +79,9 @@
 
 .chordText {
 	font-size: 10px;
+	fill: #575757;
+	color: #575757;
+	font-weight: 400;
 }
 
 .solidArc:hover {

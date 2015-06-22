@@ -168,11 +168,11 @@ function drawRoses(data, diagonal, provincies, radius, color) {
 
 	var arc = d3.svg.arc()
 	  .innerRadius(function (d) { 
-			if (d.data < 0.005 ) {return 0;}
+			if (d.data < 0.002 ) {return 0;}
 			else {return innerRadius;}
 	  })
 	  .outerRadius(function (d) { 
-			if (d.data < 0.005 ) {return 0;} 
+			if (d.data < 0.002 ) {return 0;} 
 			else {return (radius - innerRadius) * pieScale(d.data) + innerRadius;}
 	  });
 

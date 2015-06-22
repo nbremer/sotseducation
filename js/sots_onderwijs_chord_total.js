@@ -4,13 +4,16 @@ var mobileScreen = ($(window).width() > 400 ? false : true);
 //////////// State of the State Main Code - Chord Diagram /////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-	var chordMargin = {left: 100, top: 40, right: 100, bottom: 40},
-		chordMaxWidth = 1000 - chordMargin.left - chordMargin.right,
-		chordMaxHeight = 700 - chordMargin.top - chordMargin.bottom,
-		chordCurrentWidth = $(".dataresource.chord").width(),
-		chordCurrentHeight = window.innerHeight*0.75,
-		chordWidth = (chordCurrentWidth < chordMaxWidth ? chordCurrentWidth : chordMaxWidth),
-		chordHeight = (chordCurrentHeight < chordMaxHeight ? chordCurrentHeight: chordMaxHeight);
+	var chordMargin = {left: 50, top: 10, right: 50, bottom: 10},
+		//chordMaxWidth = 1000 - chordMargin.left - chordMargin.right,
+		//chordMaxHeight = 700 - chordMargin.top - chordMargin.bottom,
+		//chordCurrentWidth = $(".dataresource.chord").width(),
+		//chordCurrentHeight = window.innerHeight*0.75,
+		//chordWidth = (chordCurrentWidth < chordMaxWidth ? chordCurrentWidth : chordMaxWidth),
+		//chordHeight = (chordCurrentHeight < chordMaxHeight ? chordCurrentHeight: chordMaxHeight);
+		chordWidth = Math.min($(".dataresource.chord").width(), 800) - chordMargin.left - chordMargin.right,
+		//chordHeight = window.innerHeight - chordMargin.top - chordMargin.bottom;
+		chordHeight = (mobileScreen ? 300 : Math.min($(".dataresource.chord").width(), 800)*5/6) - chordMargin.top - chordMargin.bottom;
 			
 	var svgChord = d3.select(".dataresource.chord").append("svg")
 			.attr("width", (chordWidth + chordMargin.left + chordMargin.right))
@@ -36,7 +39,7 @@ var mobileScreen = ($(window).width() > 400 ? false : true);
 	//////////////////// Titles on top ///////////////////
 	//////////////////////////////////////////////////////
 	
-	var chordRadius = Math.min(chordWidth, chordHeight) / 2 - 100;
+	var chordRadius = Math.min(chordWidth, chordHeight) / 2 - (mobileScreen ? 80 : 100);
 	var titleOffset = 40;
 	//The 50 = pullOutSize;
 	
@@ -74,15 +77,6 @@ var mobileScreen = ($(window).width() > 400 ? false : true);
 		.attr("y2", titleOffset+8)
 		.style("stroke", "#DCDCDC")
 		.style("shape-rendering", "crispEdges")
-	//The title on top
-	/*chordTitleWrapper.append("text")
-		.attr("class","chordTitle")
-		.attr("x", (chordWidth/2 + chordMargin.left))
-		.attr("y", 15)
-		.style("text-anchor", "middle")
-		.attr("fill", "#5E5E5E")
-		.style("font-size", "16px")
-		.text("Welke opleidingen leiden tot welke beroepen?");*/
 		
 	//The title on top
 	chordTitleWrapper.append("text")
@@ -93,26 +87,6 @@ var mobileScreen = ($(window).width() > 400 ? false : true);
 		.attr("fill", "#5E5E5E")
 		.style("font-size", "16px")
 		.text("HBO");
-		
-	//Add small explanation
-	/*
-	chordExplanationWrapper.append("text")
-		.attr("x", 10)
-		.attr("y", (chordHeight))
-		.attr("dy", ".35em")
-		.style("text-anchor", "start")
-		.attr("fill", "#949494")
-		.style("font-size", "11px")
-		.text("Deze plot laat per opleiding zien in welke sector deze afgestudeerden iets meer dan een jaar later werken. " +
-			  "Aan de linkerkant staan de verschillende opleidingsrichtingen " +
-			  "en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. " +
-			  "De dikte van een lijn geeft het aantal afgestudeerden weer " +
-			  "en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien")
-		.call(wrap, 300);*/
-
-	//Move the buttons to the middle
-	//d3.select("#ChordButtonWrapper")
-	//	.style("left", (chordWidth/2 + chordButtonHalfWidth - chordButtonPadding)+"px");
 			
 	//Draw the map
 	drawChord(chordWidth, chordHeight, chordMargin);
@@ -122,7 +96,7 @@ var mobileScreen = ($(window).width() > 400 ? false : true);
 	///////////////////////////////////////////////////////////////////////////
 	
 	//On resize, make sure the chord diagram still fits
-	window.onresize = function() {
+	/*window.onresize = function() {
 		var newChordWidth = (window.innerWidth*0.76)*0.95,
 			newChordHeigth = window.innerHeight*0.75;
 		
@@ -155,7 +129,7 @@ var mobileScreen = ($(window).width() > 400 ? false : true);
 			.attr("x", (chordWidth/2 + chordMargin.left));
 		d3.selectAll(".chordTitleNiveau")
 			.attr("x", (chordWidth/2 + chordMargin.left));
-    }	
+    }	*/
 	
 //////////////////////////////////////////////////////
 ////////////// Draw the Chord/Sankey /////////////////
@@ -166,7 +140,7 @@ function drawChord(width, height, margin) {
 	//and adjusted for my circumstances
 	
 	var Names= ["Administratief personeel","Ambachtslieden","Bedrijfsbeheer (vak)specialisten","Elementaire beroepen","Gezondheidszorg (vak)specialisten",
-				"IT (vak)specialisten","Juridisch en culturele (vak)specialisten","Leidinggevende functies","Onderwijsgevenden",
+				"IT (vak)specialisten","Juridisch/Culturele (vak)specialisten","Leidinggevende functies","Onderwijsgevenden",
 				"Verkopers en verleners persoonlijke diensten","Verzorgend personeel","Wetenschap/Techniek (vak)specialisten", "Overig", "",
 				"Techniek","Onderwijs","Landbouw","Kunst, Taal en Cultuur","Gezondheidszorg","Gedrag & Maatschappij","Economie",""];
 	var emptyPerc = 0.5,
@@ -245,12 +219,12 @@ function drawChord(width, height, margin) {
 	////////////////////////////////////////////////////////////
 	
 	/*** Define parameters and tools ***/
-	var outerRadius = Math.min(width, height) / 2 - 100,
+	var outerRadius = Math.min(width, height) / 2 - (mobileScreen ? 80 : 100),
 		innerRadius = outerRadius * 0.95;
 		
 	var offset = offsetHBO, //amount of clockwise rotation
 		respondents = respondentsHBO, //number of respondents for the %'s in the hover titles
-		pullOutSize = (mobileScreen? 10 : 50), //how far apart to pull the two halves
+		pullOutSize = (mobileScreen? 20 : 50), //how far apart to pull the two halves
 		opacityDefault = 0.6, //default opacity of chords
 		opacityLow = 0.02;
 
@@ -366,9 +340,12 @@ function drawChord(width, height, margin) {
 		groupG.append("text")
 			.attr("class", "chordText")
 			.attr("dy", ".35em")
+			.attr("x", 0)
+			.attr("y", 0)
 			.attr("fill", "#8F8F8F")
 			.style("opacity", 0)
-			.text(function (d) {return Names[d.index];});
+			.text(function (d) {return Names[d.index];})
+			.call(wrapChord, 120);
 
 		//position group labels to match layout
 		groupG.select("text")

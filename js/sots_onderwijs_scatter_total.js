@@ -9,11 +9,11 @@
 
 var scatterMargin = {left: 50, top: 50, right: 20, bottom: 50},
 	scatterWidth = Math.min($(".dataresource.scatterMBO").width(),600) - scatterMargin.left - scatterMargin.right,
-	scatterHeight = scatterWidth*2/3,
-	scatterLegendMargin = {left: 0, top: 10, right: 0, bottom: 10},
-	scatterLegendWidth = $(".dataresource.scatterLegend").width() - scatterLegendMargin.left - scatterLegendMargin.right,
-	legendSectorHeight = 20,
-	scatterLegendHeight = 310;
+	scatterHeight = scatterWidth*2/3;
+	
+var	circleLegendMargin = {left: 10, top: 10, right: 10, bottom: 10},
+	circleLegendWidth = $(".dataresource.scatterLegendCircle").width() - circleLegendMargin.left - circleLegendMargin.right,
+	circleLegendHeight = 100;
 
 //Create and SVG for each element
 var svgScatterMBO = d3.select(".dataresource.scatterMBO").append("svg")
@@ -22,11 +22,11 @@ var svgScatterMBO = d3.select(".dataresource.scatterMBO").append("svg")
 
 var svgScatterHBO = d3.select(".dataresource.scatterHBO").append("svg")
 			.attr("width", (scatterWidth + scatterMargin.left + scatterMargin.right))
-			.attr("height", (scatterHeight + scatterMargin.top + scatterMargin.bottom));
+			.attr("height", (scatterHeight + scatterMargin.top + scatterMargin.bottom));	
 
-var svgScatterLegend = d3.select(".dataresource.scatterLegend").append("svg")
-			.attr("width", (scatterLegendWidth + scatterLegendMargin.left + scatterLegendMargin.right))
-			.attr("height", (scatterLegendHeight + scatterLegendMargin.top + scatterLegendMargin.bottom));			
+var svgCircleLegend = d3.select(".dataresource.scatterLegendCircle").append("svg")
+			.attr("width", (circleLegendWidth + circleLegendMargin.left + circleLegendMargin.right))
+			.attr("height", (circleLegendHeight + circleLegendMargin.top + circleLegendMargin.bottom));		
 
 //Create and g element for each SVG			
 var scatterMBO = svgScatterMBO.append("g").attr("class", "chartMBO")
@@ -34,9 +34,9 @@ var scatterMBO = svgScatterMBO.append("g").attr("class", "chartMBO")
 		
 var scatterHBO = svgScatterHBO.append("g").attr("class", "chartHBO")
 		.attr("transform", "translate(" + scatterMargin.left + "," + scatterMargin.top + ")");
-		
-var scatterLegend = svgScatterLegend.append("g").attr("class", "legendWrapper")
-				.attr("transform", "translate(" + (scatterLegendWidth/2 + scatterLegendMargin.left) + "," + (scatterLegendMargin.top) +")");
+
+var circleLegend = svgCircleLegend.append("g").attr("class", "legendWrapper")
+				.attr("transform", "translate(" + (circleLegendWidth/2 + circleLegendMargin.left) + "," + (circleLegendMargin.top + 20) +")");
 
 ///////////////////////////////////////////////////////////////////////////
 /////////////////// Scatterplot specific functions ////////////////////////
@@ -47,92 +47,59 @@ var scatterLegend = svgScatterLegend.append("g").attr("class", "legendWrapper")
 ///////////////////////////////////////////////////////////////////////////
 function createScatterLegend() {
 	
-	var legendRectSize = 15, //dimensions of the colored square
-		legendMaxWidth = 125; //maximum size that the longest element will be - to center content
-					
-	//Create container for all rectangles and text 
-	var sectorLegendWrapper = scatterLegend.append("g").attr("class", "legendWrapper")
-					.attr("transform", "translate(" + 0 + "," + 0 +")");
-	
-	/*//Append title to Legend
-	sectorLegendWrapper.append('text')                                     
-		  .attr('transform', 'translate(' + 0 + ',' + 0 + ')')
-		  .attr("class", "legendTitle")
-		  .style("text-anchor", "middle")	
-		  .style("font-size", "13px")
-		  .text("Studie sector"); */
-		  
-	/*sectorLegendWrapper.append('text')                                     
-		  .attr('transform', 'translate(' + 0 + ',' + 15 + ')')
-		  .attr("class", "legendText")
-		  .style("text-anchor", "middle")	
-		  .style("font-size", "10px")
-		  .attr("x",0)
-		  .attr("y", 0)
-		  .attr("dy", "0.35em")
-		  .text("Selecteer alle opleidingen binnen 1 sector door op een sector in de legenda te klikken")
-		  .call(wrap, legendMaxWidth*1.5); */
-		  
+	var margin = {left: 10, top: 10, right: 10, bottom: 10},
+		legendRectSize = 15, //dimensions of the colored square
+		legendSectorWidth = 150, //width of one legend square-text element
+		legendSectorHeight = 30, //height of one legend square-text element
+		legendWidth = $(".dataresource.scatterLegend").width(), //the width of the bootstrap div
+		legendNumCols = Math.min(Math.floor(legendWidth / legendSectorWidth), 7), //what number of columns fits in div
+		legendNumRows = Math.ceil(7/legendNumCols),	//what number of rows is needed to place the sectors
+		legendHeight = legendNumRows * legendSectorHeight, //what is the total height needed for the entire legend
+		legendWidth = legendSectorWidth * legendNumCols;
+		
 	//Create container per rect/text pair  
-	var sectorLegend = sectorLegendWrapper.selectAll('.scatterLegendSquare')  	
+	var legendWrapper = d3.select(".dataresource.scatterLegend").append("svg")
+			.attr("width", legendWidth)
+			.attr("height", legendHeight + margin.top + margin.bottom)
+			.append("g")
+			.attr("transform", "translate(" + 0 + "," + margin.top +")");;
+	
+	//Create container per rect/text pair  
+	var sectorLegend = legendWrapper.selectAll('.scatterLegendSquare')  	
 			  .data(sectorColor.range())                              
 			  .enter().append('g')   
-			  .attr('class', 'scatterLegendSquare') 
-			  .attr('width', scatterLegendWidth)
+			  .attr('class', 'scatterLegendSquare')                                
+			  .attr('width', legendSectorWidth)
 			  .attr('height', legendSectorHeight)
-			  .attr("transform", function(d,i) { return "translate(" + 0 + "," + (i * legendSectorHeight) + ")"; })
+			  .attr("transform", function(d,i) { return "translate(" + (i%legendNumCols * legendSectorWidth) + "," + (Math.floor(i/legendNumCols) * 30) + ")"; })
 			  .style("cursor", "pointer")
 			  .on("mouseover", sectorSelect(0.02))
 			  .on("mouseout", sectorSelect(0.5))
 			  .on("click", sectorClick);
-	 
+			  
 	//Non visible white rectangle behind square and text for better UX
 	sectorLegend.append('rect')                                     
-		  .attr('width', legendMaxWidth) 
+		  .attr('width', legendSectorWidth) 
 		  .attr('height', legendSectorHeight) 			  
-		  .attr('transform', 'translate(' + (-legendMaxWidth/2) + ',' + 0 + ')') 		  
+		  .attr('transform', 'translate(' + 0 + ',' + 0 + ')') 		  
 		  .style('fill', "white");
 	//Append small squares to Legend
 	sectorLegend.append('rect')                                     
 		  .attr('width', legendRectSize) 
 		  .attr('height', legendRectSize) 			  
-		  .attr('transform', 'translate(' + (-legendMaxWidth/2) + ',' + 0 + ')') 		  
+		  .attr('transform', 'translate(' + 10 + ',' + 0 + ')') 		  
 		  .style('fill', function(d) {return d;});                                 
 	//Append text to Legend
 	sectorLegend.append('text')                                     
-		  .attr('transform', 'translate(' + (-legendMaxWidth/2 + 20) + ',' + (legendRectSize/2) + ')')
+		  .attr('transform', 'translate(' + (legendRectSize + 15) + ',' + (legendRectSize/2) + ')')
 		  .attr("class", "legendText")
 		  .style("text-anchor", "start")
 		  .attr("dy", ".30em")
 		  //.attr("fill", "#949494")
-		  .style("font-size", "10px")			  
+		  .style("font-size", "11px")			  
 		  .text(function(d,i) { return sectorColor.domain()[i]; });  
-
-	//Create a wrapper for the circle legend				
-	var legendCircle = scatterLegend.append("g").attr("class", "legendWrapper")
-					.attr("transform", "translate(" + 0 + "," + (8*legendSectorHeight + 10) +")");
-	
-	legendCircle.append("text")
-		.attr("class","legendTitle")
-		.attr("transform", "translate(" + 0 + "," + -14 + ")")
-		.attr("x", 0 + "px")
-		.attr("y", 0 + "px")
-		.attr("dy", "1em")
-		.text("Elke cirkel is een opleiding")
-		.call(wrap, 90);
-	legendCircle.append("circle")
-        .attr('r', rScale(3000))
-        .attr('class',"legendCircle")
-        .attr('cx', 0)
-        .attr('cy', (50-rScale(3000)))
 		
-	//Create g element for bubble size legend
-	var bubbleSizeLegend = scatterLegend.append("g").attr("class", "legendWrapper")
-					.attr("transform", "translate(" + 0 + "," + (8*legendSectorHeight + 90) +")");
-	//Draw the bubble size legend
-	bubbleLegend(bubbleSizeLegend, rScale, legendSizes = [100, 600, 3000], legendName = "Aantal respondenten");		
-		
-};//function createScatterLegend
+}//function createScatterLegend
 
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////// Click functions for legend //////////////////////////
@@ -2281,5 +2248,29 @@ drawScatter(data = HBOScatter, wrapper = scatterHBO, width = scatterWidth, heigh
 
 //Draw the legend
 createScatterLegend();
+
+//Create a wrapper for the circle legend				
+var legendCircle = circleLegend.append("g").attr("class", "legendWrapper")
+				.attr("transform", "translate(" + -60 + "," + 20 +")");
+
+legendCircle.append("text")
+	.attr("class","legendTitle")
+	.attr("transform", "translate(" + 0 + "," + -14 + ")")
+	.attr("x", 0 + "px")
+	.attr("y", 0 + "px")
+	.attr("dy", "1em")
+	.text("Elke cirkel is een opleiding")
+	.call(wrap, 90);
+legendCircle.append("circle")
+	.attr('r', rScale(3000))
+	.attr('class',"legendCircle")
+	.attr('cx', 0)
+	.attr('cy', (50-rScale(3000)))
+	
+//Create g element for bubble size legend
+var bubbleSizeLegend = circleLegend.append("g").attr("class", "legendWrapper")
+				.attr("transform", "translate(" + 60 + "," + 20 +")");
+//Draw the bubble size legend
+bubbleLegend(bubbleSizeLegend, rScale, legendSizes = [100, 600, 3000], legendName = "Aantal respondenten");		
 
 
