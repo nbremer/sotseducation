@@ -74,7 +74,7 @@ function createScatterLegend() {
 			  .attr("transform", function(d,i) { return "translate(" + (i%legendNumCols * legendSectorWidth) + "," + (Math.floor(i/legendNumCols) * 30) + ")"; })
 			  .style("cursor", "pointer")
 			  .on("mouseover", sectorSelect(0.02))
-			  .on("mouseout", sectorSelect(0.5))
+			  .on("mouseout", sectorSelect(0.7))
 			  .on("click", sectorClick);
 			  
 	//Non visible white rectangle behind square and text for better UX
@@ -124,7 +124,7 @@ function sectorClick(d,i) {
 	/////////////////// MBO ///////////////////	
 	//Only show the circles of the chosen sector
 	scatterMBO.selectAll("circle")
-		.style("opacity", 0.5)
+		.style("opacity", 0.7)
 		.style("visibility", function(d) {
 			if (d.Studie_sector != chosen) return "hidden";
 			else return "visible";
@@ -144,7 +144,7 @@ function sectorClick(d,i) {
 	/////////////////// HBO ///////////////////	
 	//Only show the circles of the chosen sector
 	scatterHBO.selectAll("circle")
-		.style("opacity", 0.5)
+		.style("opacity", 0.7)
 		.style("visibility", function(d) {
 			if (d.Studie_sector != chosen) return "hidden";
 			else return "visible";
@@ -169,12 +169,12 @@ function resetClick() {
 	//Activate the mouse over and mouse out events of the legend
 	d3.selectAll(".scatterLegendSquare")
 		.on("mouseover", sectorSelect(0.02))
-		.on("mouseout", sectorSelect(0.5));
+		.on("mouseout", sectorSelect(0.7));
 
 	/////////////////// MBO ///////////////////	
 	//Show all circles
 	scatterMBO.selectAll("circle")
-		.style("opacity", 0.5)
+		.style("opacity", 0.7)
 		.style("visibility", "visible");
 
 	//Activate all pop-over events
@@ -185,7 +185,7 @@ function resetClick() {
 	/////////////////// HBO ///////////////////	
 	//Show all circles
 	scatterHBO.selectAll("circle")
-		.style("opacity", 0.5)
+		.style("opacity", 0.7)
 		.style("visibility", "visible");
 	
 	//Activate all pop-over events
@@ -207,7 +207,7 @@ function removeScatterTooltip (d, i) {
 	else var element = d3.selectAll(".circle.HBO."+d.StudieClass);
 		
 	//Fade out the bubble again
-	element.style("opacity", 0.5);
+	element.style("opacity", 0.7);
 	
 	//Hide tooltip
 	$('.popover').each(function() {
@@ -382,7 +382,7 @@ function drawScatter(data, wrapper, width, height, margin, chartTitle, circleCla
 			.data(data.sort(function(a,b) { return b.Total > a.Total; })) //Sort so the biggest circles are below
 			.enter().append("circle")
 				.attr("class", function(d,i) { return "circle " + circleClass + " " + d.StudieClass; })
-				.style("opacity", 0.5)
+				.style("opacity", 0.7)
 				.style("stroke", function(d) { if(d.Studienaam.indexOf("Overig") > -1) return d3.rgb(sectorColor(d.Studie_sector)).darker(); })
 				.style("stroke-width", function(d) { if(d.Studienaam.indexOf("Overig") > -1) return 1.5; })
 				.style("fill", function(d) {return sectorColor(d.Studie_sector);})
@@ -2231,6 +2231,7 @@ var rScale = d3.scale.sqrt()
 
 var sectorColor = d3.scale.ordinal()
 					.range(["#EFB605", "#E3690B", "#CF003E", "#991C71", "#4F54A8", "#07997E", "#7EB852"])
+					//.range(['#72c7e7', "#3C8A2E", '#3a90ca', "#81BC00", '#1c5aa2', "#BDD203", '#002776'])
 					.domain(["economie", "gedrag & maatschappij", "gezondheidszorg", "kunst, taal en cultuur", "landbouw", "onderwijs", "techniek"]);
 	
 	
