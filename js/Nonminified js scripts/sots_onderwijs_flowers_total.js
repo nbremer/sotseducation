@@ -112,7 +112,7 @@ function createRoseLegend() {
 			  .attr('transform', 'translate(' + (legendRectSize + 10 + 5) + ',' + (legendRectSize/2) + ')')
 			  .style("text-anchor", "start")
 			  .attr("dy", ".35em")
-			  .attr("fill", "#949494")
+			  .attr("fill", "#4F4F4F")
 			  .style("font-size", "10px")			  
 			  .text(function(d,i) { return roseProvincies[i]; });  
 
@@ -135,7 +135,7 @@ function createRoseLegend() {
 		.attr("y", 10)
 		.attr("dy", ".35em")
 		.style("text-anchor", "start")
-		.attr("fill", "#949494")
+		.attr("fill", "#4F4F4F")
 		.style("font-size", "11px")
 		.text("Geeft aan dat dit de provincie zelf is. Dit stukje is leeg gelaten en het percentage van afgestudeerden dat " +
 			  "na 1.5 jaar in dezelfde provincie woont staat in het midden van elke plot")
