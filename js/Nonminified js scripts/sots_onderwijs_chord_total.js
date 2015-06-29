@@ -248,19 +248,18 @@ function drawChord(width, height, margin) {
 		.radius(innerRadius)
 		.startAngle(startAngle)
 		.endAngle(endAngle);
-		
+
 	//define the default chord layout parameters
 	//within a function that returns a new layout object;
 	//that way, you can create multiple chord layouts
 	//that are the same except for the data.
 	function getDefaultLayout() {
-		return d3.layout.chord()
+		return customChordLayout() //d3.layout.chord()
 		.padding(0.02)
-		.sortSubgroups(d3.descending)
 		.sortChords(d3.ascending);
 	}  
 	var last_layout; //store layout between updates
-	
+
 	//Remove any previous chords
 	chordWrapper.selectAll("g").remove();
 	
@@ -385,6 +384,7 @@ function drawChord(width, height, margin) {
 			.append("path")
 			.attr("class", "chord")
 			.style("stroke", "none")
+			//.style("fill", "#D3D3D3")
 			.style("fill", 	"url(#gradientLinearPerLine)") //gradientLinear //"#C4C4C4")
 			.style("stroke-opacity", 0)
 			.style("opacity", 0)
@@ -602,7 +602,129 @@ function drawChord(width, height, margin) {
 	//////////// END - Custom Chord Function ///////////////////
 	////////////////////////////////////////////////////////////
 
+	////////////////////////////////////////////////////////////
+	////////// Custom Chord Layout Function ////////////////////
+	////////////////////////////////////////////////////////////
 
+	function customChordLayout() {
+	var ε = 1e-6, ε2 = ε * ε, π = Math.PI, τ = 2 * π, τε = τ - ε, halfπ = π / 2, d3_radians = π / 180, d3_degrees = 180 / π;
+    var chord = {}, chords, groups, matrix, n, padding = 0, sortGroups, sortSubgroups, sortChords;
+    function relayout() {
+      var subgroups = {}, groupSums = [], groupIndex = d3.range(n), subgroupIndex = [], k, x, x0, i, j;
+      chords = [];
+      groups = [];
+      k = 0, i = -1;
+      while (++i < n) {
+        x = 0, j = -1;
+        while (++j < n) {
+          x += matrix[i][j];
+        }
+        groupSums.push(x);
+        subgroupIndex.push(d3.range(n).reverse());
+        k += x;
+      }
+      if (sortGroups) {
+        groupIndex.sort(function(a, b) {
+          return sortGroups(groupSums[a], groupSums[b]);
+        });
+      }
+      if (sortSubgroups) {
+        subgroupIndex.forEach(function(d, i) {
+          d.sort(function(a, b) {
+            return sortSubgroups(matrix[i][a], matrix[i][b]);
+          });
+        });
+      }
+      k = (τ - padding * n) / k;
+      x = 0, i = -1;
+      while (++i < n) {
+        x0 = x, j = -1;
+        while (++j < n) {
+          var di = groupIndex[i], dj = subgroupIndex[di][j], v = matrix[di][dj], a0 = x, a1 = x += v * k;
+          subgroups[di + "-" + dj] = {
+            index: di,
+            subindex: dj,
+            startAngle: a0,
+            endAngle: a1,
+            value: v
+          };
+        }
+        groups[di] = {
+          index: di,
+          startAngle: x0,
+          endAngle: x,
+          value: (x - x0) / k
+        };
+        x += padding;
+      }
+      i = -1;
+      while (++i < n) {
+        j = i - 1;
+        while (++j < n) {
+          var source = subgroups[i + "-" + j], target = subgroups[j + "-" + i];
+          if (source.value || target.value) {
+            chords.push(source.value < target.value ? {
+              source: target,
+              target: source
+            } : {
+              source: source,
+              target: target
+            });
+          }
+        }
+      }
+      if (sortChords) resort();
+    }
+    function resort() {
+      chords.sort(function(a, b) {
+        return sortChords((a.source.value + a.target.value) / 2, (b.source.value + b.target.value) / 2);
+      });
+    }
+    chord.matrix = function(x) {
+      if (!arguments.length) return matrix;
+      n = (matrix = x) && matrix.length;
+      chords = groups = null;
+      return chord;
+    };
+    chord.padding = function(x) {
+      if (!arguments.length) return padding;
+      padding = x;
+      chords = groups = null;
+      return chord;
+    };
+    chord.sortGroups = function(x) {
+      if (!arguments.length) return sortGroups;
+      sortGroups = x;
+      chords = groups = null;
+      return chord;
+    };
+    chord.sortSubgroups = function(x) {
+      if (!arguments.length) return sortSubgroups;
+      sortSubgroups = x;
+      chords = null;
+      return chord;
+    };
+    chord.sortChords = function(x) {
+      if (!arguments.length) return sortChords;
+      sortChords = x;
+      if (chords) resort();
+      return chord;
+    };
+    chord.chords = function() {
+      if (!chords) relayout();
+      return chords;
+    };
+    chord.groups = function() {
+      if (!groups) relayout();
+      return groups;
+    };
+    return chord;
+  };
+	
+	////////////////////////////////////////////////////////////
+	//////// END - Custom Chord Layout Function ////////////////
+	////////////////////////////////////////////////////////////
+	
 	////////////////////////////////////////////////////////////
 	/////////////// Functions from AmeliaBR ////////////////////
 	//////////// for changing between datasets /////////////////
