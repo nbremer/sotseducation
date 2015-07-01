@@ -139,7 +139,7 @@ function createRoseLegend() {
 		.style("font-size", "11px")
 		.text("Geeft aan dat dit de provincie zelf is. Dit stukje is leeg gelaten en het percentage van afgestudeerden dat " +
 			  "na 1.5 jaar in dezelfde provincie woont staat in het midden van elke plot")
-		.call(wrap, ($("#roseLegendCircles").width() - 60));			  
+		.call(wrap, ($("#roseLegendCircles").width() - 70));			  
 };//function createRoseLegend
 
 //Draw the legend

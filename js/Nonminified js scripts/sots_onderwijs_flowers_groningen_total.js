@@ -91,7 +91,7 @@ function createRoseLegend() {
 	//Create the explanation of the three little circles
 	var svgRose = 	d3.select("#roseGroningenLegendCircles").append("svg")
 		.attr("width", $("#roseGroningenLegendCircles").width())
-		.attr("height", $("#roseGroningenLegendCircles").height()/(mobileScreen ? 3 : 4));
+		.attr("height", $("#roseGroningenLegendCircles").height()/(mobileScreen ? 2 : 3));
 
 	svgRose.selectAll(".flowerLegend.circle")
 		.data([1,2,3])
@@ -109,9 +109,8 @@ function createRoseLegend() {
 		.style("text-anchor", "start")
 		.attr("fill", "#4F4F4F")
 		.style("font-size", "11px")
-		.text("Geeft aan dat dit de provincie zelf is. Dit stukje is leeg gelaten en het percentage van afgestudeerden dat " +
-			  "na 1.5 jaar in dezelfde provincie woont staat in het midden van elke plot")
-		.call(wrap, ($("#roseGroningenLegendCircles").width() - 60));			  
+		.text("Dit is de provincie Groningen zelf. Omdat het percentage dat in Groningen blijft al binnen in elke plot aangegeven staat, is dit stukje express leeg gelaten")
+		.call(wrap, ($("#roseGroningenLegendCircles").width() - 100));			  
 };//function createRoseLegend
 
 //Draw the legend
