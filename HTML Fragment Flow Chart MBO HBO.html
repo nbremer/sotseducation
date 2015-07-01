@@ -10,33 +10,31 @@
 <script src="/content/dam/html/nl/sots/onderwijs/js/sots_onderwijs_general.min.js"></script>
 
 <!-- SotS Onderwijs Stretched Chord HTML -->
-<div class = "sotsVisualWrapper">
-	<div id="cont" class="container-fluid">
-		<div class="row text-center">
-			<div class="col-md-12">
-				<div class="title-h3" style="color: #3B3B3B; padding-bottom: 10px;">Welke opleidingen leiden tot welke beroepen?</div>
-				<div class="dataresource chord"></div>
+<div id="cont" class="container-fluid">
+	<div class="row text-center">
+		<div class="col-md-12">
+			<div class="title-h3" style="color: #3B3B3B; padding-bottom: 10px;">Welke opleidingen leiden tot welke beroepen?</div>
+			<div class="dataresource chord"></div>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div id="ChordButtonWrapper" class="col-md-12">
+			<div id="ChordButtons" class="btn-group" data-toggle="buttons">
+				<label id="ChordMBObutton" class="btn btn-default"><input type="radio" class="btn-options"> MBO </label>
+				<label id="ChordHBObutton" class="btn btn-default active"><input type="radio" class="btn-options"> HBO </label>
 			</div>
 		</div>
-		<div class="row text-center">
-			<div id="ChordButtonWrapper" class="col-md-12">
-				<div id="ChordButtons" class="btn-group" data-toggle="buttons">
-					<label id="ChordMBObutton" class="btn btn-default"><input type="radio" class="btn-options"> MBO </label>
-					<label id="ChordHBObutton" class="btn btn-default active"><input type="radio" class="btn-options"> HBO </label>
-				</div>
-			</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-8 col-md-offset-2">
+			<div style="color: #949494; font-size: 11px; padding-top: 20px;">Deze plot laat per opleiding zien in welke sector deze afgestudeerden iets meer dan een jaar later werken. 
+			Aan de linkerkant staan de verschillende opleidingsrichtingen en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. 
+			De dikte van een lijn geeft het aantal afgestudeerden weer en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien</div>
 		</div>
-		<div class="row text-center">
-			<div class="col-md-8 col-md-offset-2">
-				<div style="color: #949494; font-size: 11px; padding-top: 20px;">Deze plot laat per opleiding zien in welke sector deze afgestudeerden iets meer dan een jaar later werken. 
-				Aan de linkerkant staan de verschillende opleidingsrichtingen en rechts staan de verschillende sectoren. Er is dus een stroom van links naar rechts. 
-				De dikte van een lijn geeft het aantal afgestudeerden weer en als je even je muis stilhoudt op een lijn, krijg je de absolute aantallen te zien</div>
-			</div>
-		</div>
-		<div class="row text-center">
-			<div class="col-md-12">
-				<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">Bron: BVE Monitor 2013 & HBO Monitor 2013</div>
-			</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-12">
+			<div class="legendTitle" style="font-size: 9px; padding-top: 20px;">Bron: BVE Monitor 2013 & HBO Monitor 2013</div>
 		</div>
 	</div>
 </div>
